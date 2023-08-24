@@ -1,10 +1,11 @@
 import express from 'express'
 import multer from 'multer'
 import prodsRouter from "./routes/products.routes.js";
+import cartsRouter from './routes/carts.router.js';
 import { __dirname } from './path.js';
 import path from 'path';
 
-const PORT = 4000
+const PORT = 8080
 const app = express()
 
 //Config
@@ -24,6 +25,7 @@ const upload = multer({ storage: storage })
 
 //Routes
 app.use('/api/products', prodsRouter)
+app.use("/api/carts", cartsRouter)
 app.use('/static', express.static(path.join(__dirname, '/public')))
 
 app.post('/upload', upload.single('product'), (req, res) => {

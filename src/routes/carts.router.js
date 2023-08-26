@@ -1,5 +1,8 @@
 import { Router } from "express";
 
+
+
+const path = "./public/json/carts/carts.json"
 const cartsRouter = Router()
 
 // Definir las rutas para carritos

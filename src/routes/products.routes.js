@@ -1,6 +1,32 @@
+//import express from 'express'
 import { Router } from "express";
+import { promises as fs } from 'fs'
 
+
+
+const path = "./public/json/products/products.json"
 const prodsRouter = Router()
+
+
+//
+//const app = express()
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 prodsRouter.get('/', async (req, res) => {
     const { limit } = req.query
@@ -26,20 +52,41 @@ prodsRouter.get('/:id', async (req, res) => {
 
 prodsRouter.post('/:id', async (req, res) => {
 
-    try {
+
+    console.log(req.body)
+    
+    const product = productManager.products.find(prod => prod.code === req.body.code)
+
+    if (product) {
+        res.status(400).send("Producto ya existente")
+    } else {
+        try {
+            const newProduct = new Product(
+                req.body.title,
+                req.body.description,
+                req.body.price,
+                req.body.code,
+                req.body.stock,
+                req.body.thumbnail
+            );
+            productManager.products.push(newProduct)
+            await productManager.writeProductsToFile(productManager.products)
+            res.status(200).send("Producto creado")
+        } catch (error) {
+            res.status(400).send(error.message)
+        }
+    }
+
+
+
+    /*try {
         const { title, description, code, price, stock, category, thumbnails } = req.body;
-        // Valida los campos obligatorios
-    
-        // Genera un nuevo producto con un ID único (puedes usar una función para generar IDs únicos)
-    
-        // Agrega el producto a la lista de productos
-    
-        // Guarda la lista de productos en el archivo "productos.json"
+        
     
         res.status(201).json({ message: 'Producto creado con éxito', product });
     } catch (error) {
         res.status(400).json({ error: 'Error al crear el producto' });
-    }
+    }*/
 
 })
 

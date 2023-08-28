@@ -1,9 +1,19 @@
 import { Router } from "express"
 import { promises as fs } from 'fs'
 
-const path = "./public/json/products/products.json"
+
+
+
+import ProductManager from "../helpers/productManager.js"
+
+
+
+
+
+const path = "./src/public/json/products/products.json"
 const prodsRouter = Router()
 
+/*
 class ProductManager {
     constructor() {
         this.products = []
@@ -87,7 +97,7 @@ class ProductManager {
         }
     }
 */
-
+/*
     async updateProduct(req, res) {
         const { id } = req.params
         const updatedProduct = req.body
@@ -136,9 +146,9 @@ class ProductManager {
             console.log("Producto no encontrado")
         }
     }
-*/
-}
 
+}
+*/
 const productManager = new ProductManager()
 
 prodsRouter.get('/', async (req, res) => {

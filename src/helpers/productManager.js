@@ -8,7 +8,7 @@ const app = express()
 app.use(express.json())
 
 
-     class ProductManager {
+    class ProductManager {
     constructor() {
         this.products = []
     }
@@ -215,7 +215,7 @@ app.post("/products", async (req, res) => {
 
 
 app.put("/products/:id", (req, res) => {
-    const {id} = req.params
+    const {id} = parseInt(req.params)
     const {title, description, price, code, stock, thumbnail} = req.body
 
     const productIndex = prods.findIndex(prod => prod.id === parseInt(id))
@@ -235,7 +235,7 @@ app.put("/products/:id", (req, res) => {
 })
 
 app.delete("/products/:id", (req, res) => {
-    const {id} = req.params
+    const {id} = parseInt(req.params)
     
 
     const productIndex = prods.findIndex(prod => prod.id === parseInt(id))

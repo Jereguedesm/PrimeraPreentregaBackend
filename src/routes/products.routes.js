@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { promises as fs } from 'fs'
+//import { promises as fs } from 'fs'
 
 
 
@@ -195,7 +195,7 @@ prodsRouter.post('/', async (req, res) => {
             req.body.code,
             req.body.stock,
             req.body.thumbnail
-        );
+        )
         productManager.products.push(newProduct)
         await productManager.writeProductsToFile(productManager.products)
         res.status(200).send("Producto creado")
